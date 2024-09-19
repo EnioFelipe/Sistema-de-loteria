@@ -19,7 +19,8 @@ namespace Projeto_Cassino
             while (tipo != 0)
             {
                 Console.Clear();
-                Console.WriteLine("Bem-Vindo ao sistema de Raspadinha!!!");
+                Console.WriteLine($"Bem-Vindo ao sistema de Raspadinha {pessoa.nome}!!!");
+                Console.WriteLine($"Saldo: R$ {pessoa.saldo}");
                 Console.WriteLine("Selecione o tipo de Raspadinha:");
                 Console.WriteLine("1 - Raspadinha de 5 números (R$ 5,00)");
                 Console.WriteLine("2 - Raspadinha de 10 números (R$ 10,00)");
@@ -41,7 +42,15 @@ namespace Projeto_Cassino
                 }
                 else if (tipo == 2)
                 {
-                    Raspadinha10();
+                    if (pessoa.saldo >= 10)
+                    {
+                        Raspadinha10();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Saldo insuficiente!!!");
+                        Console.ReadKey();
+                    }
                 }
                 else if (tipo == 0)
                 {
@@ -55,10 +64,10 @@ namespace Projeto_Cassino
                 }
             }
         }
-    }
 
         public void Raspadinha5()
         {
+            int custo = 5;
             int numeroPrincipal = 0;
             int premioTotal = 0;
 
@@ -83,6 +92,8 @@ namespace Projeto_Cassino
                 else
                 {
                     Console.Clear();
+                    pessoa.saldo -= custo;
+                    Console.WriteLine($"Saldo atual: R$ {pessoa.saldo}");
                     Console.WriteLine("Número principal: " + numeroPrincipal);
                     Console.WriteLine("Aguarde o resultado...");
 
@@ -97,28 +108,29 @@ namespace Projeto_Cassino
 
                     if (premioTotal > 0)
                     {
-                        Console.WriteLine("Parabéns você ganhou!!!");
+                        Console.WriteLine($"Parabéns você ganhou {premioTotal}!!!");
                         pessoa.saldo += premioTotal;
-                        Console.WriteLine("Saldo atual: " + pessoa.saldo);
+                        Console.WriteLine($"Saldo atual: {pessoa.saldo} ");
                         Console.ReadKey();
                     }
                     else
                     {
                         Console.WriteLine("Que pena, não foi dessa vez, jogue novamente!");
                         Console.ReadKey();
+                    }
                 }
             }
-
         }
 
         public void Raspadinha10()
         {
+            int custo = 10;
             int numeroPrincipal = 0;
             int premioTotal = random.Next(1, 100);
             int contador = 0;
 
             int[] sorteios = new int[10];
-            
+
             for (int i = 0; i < 10; i++)
             {
                 sorteios[i] = random.Next(1, 10);
@@ -127,6 +139,7 @@ namespace Projeto_Cassino
             while (numeroPrincipal < 1 || numeroPrincipal > 10)
             {
                 Console.Clear();
+                pessoa.saldo -= custo;
                 Console.WriteLine("Digite o número principal (Mínimo:1 | Máximo: 10):");
                 numeroPrincipal = int.Parse(Console.ReadLine());
                 if (numeroPrincipal < 1 || numeroPrincipal > 10)
@@ -152,12 +165,16 @@ namespace Projeto_Cassino
                     {
                         Console.WriteLine("Parabéns o seu número apareceu 3 Vezes");
                         Console.WriteLine($"Prêmio total: R$ {premioTotal}");
+                        pessoa.saldo += premioTotal;
+                        Console.WriteLine($"Saldo: R${pessoa.saldo}");
                         Console.ReadKey();
                     }
                     else if (contador == 5)
                     {
                         Console.WriteLine("Parabéns o seu número apareceu 5 Vezes");
-                        Console.WriteLine($"Prêmio total: R$ {premioTotal*2}");
+                        Console.WriteLine($"Prêmio total: R$ {premioTotal * 2}");
+                        pessoa.saldo += premioTotal*2;
+                        Console.WriteLine($"Saldo: R${pessoa.saldo}");
                         Console.ReadKey();
                     }
                     else

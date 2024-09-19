@@ -37,7 +37,7 @@ namespace Projeto_Cassino
                 else if (opcao == 2)
                 {
                     Console.Clear();
-                    Raspadinha raspadinha = new Raspadinha();
+                    Raspadinha raspadinha = new Raspadinha(pessoa);
                 }
                 else if (opcao == 3)
                 {
