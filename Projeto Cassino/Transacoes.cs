@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Projeto_Cassino
 {
@@ -16,7 +17,8 @@ namespace Projeto_Cassino
             int opcao = 1;
             while (opcao != 0)
             {
-                Console.WriteLine("Selecione uma opção");
+                Console.Clear();
+                Console.WriteLine($"Selecione uma opção \t Saldo R${pessoa.Saldo}");
                 Console.WriteLine("1 - Depositar");
                 Console.WriteLine("2 - Sacar");
                 Console.WriteLine("0 - Sair");
@@ -46,27 +48,30 @@ namespace Projeto_Cassino
         {
             Console.WriteLine("Digite o valor a ser depositado:");
             int valor = int.Parse(Console.ReadLine());
-            pessoa.saldo += valor;
+            pessoa.Saldo += valor;
             Console.WriteLine("Depósito realizado com sucesso!!!");
-            Console.WriteLine("Saldo atual: " + pessoa.saldo);
+            Console.WriteLine("Saldo atual: " + pessoa.Saldo);
+            Console.WriteLine("Pressione ENTER para retornar");
             Console.ReadKey();
         }
         public void Sacar()
         {
             Console.WriteLine("Digite o valor a ser sacado:");
             int valor = int.Parse(Console.ReadLine());
-            if (valor > pessoa.saldo)
+            if (valor > pessoa.Saldo)
             {
                 Console.WriteLine("Saldo insuficiente!!!");
+                Console.WriteLine("Pressione ENTER para retornar");
                 Console.ReadKey();
                 return;
             }
             else
             {
-                pessoa.saldo -= valor;
+                pessoa.Saldo -= valor;
             }
             Console.WriteLine("Saque realizado com sucesso!!!");
-            Console.WriteLine("Saldo atual: " + pessoa.saldo);
+            Console.WriteLine("Saldo atual: " + pessoa.Saldo);
+            Console.WriteLine("Pressione ENTER para retornar");
             Console.ReadKey();
         }
     }

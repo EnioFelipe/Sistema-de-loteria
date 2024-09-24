@@ -3,33 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Projeto_Cassino
 {
     internal class Pessoa
     {
-        public string nome { get; set; }
-        public int saldo { get; set; }
+        private string nome;
+        private int saldo;
 
-        public string GetNome()
+        public string Nome
         {
-            return nome;
+            get { return nome; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("O nome não pode ser vazio.");
+                }
+                else if (value.Any(char.IsDigit))
+                {
+                    throw new ArgumentException("O nome não pode conter números.");
+                }
+                else
+                {
+                    nome = value;
+                }
+            }
         }
 
-        public void SetNome(string value)
+        public int Saldo
         {
-            nome = value;
+            get { return saldo; }
+            set { saldo = value; }
         }
-
-        public int GetSaldo()
-        {
-            return saldo;
-        }
-
-        public void SetSaldo(int value)
-        {
-            saldo = value;
-        }
-
     }
 }

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Projeto_Cassino
 {
     internal class Raspadinha
     {
-        static Random random = new Random();
+        static private readonly Random random = new Random();
         public Pessoa pessoa;
         public Raspadinha(Pessoa pessoa)
         {
@@ -19,8 +20,8 @@ namespace Projeto_Cassino
             while (tipo != 0)
             {
                 Console.Clear();
-                Console.WriteLine($"Bem-Vindo ao sistema de Raspadinha {pessoa.nome}!!!");
-                Console.WriteLine($"Saldo: R$ {pessoa.saldo}");
+                Console.WriteLine($"Bem-Vindo ao sistema de Raspadinha {pessoa.Nome}!!!");
+                Console.WriteLine($"Saldo R$ {pessoa.Saldo}");
                 Console.WriteLine("Selecione o tipo de Raspadinha:");
                 Console.WriteLine("1 - Raspadinha de 5 números (R$ 5,00)");
                 Console.WriteLine("2 - Raspadinha de 10 números (R$ 10,00)");
@@ -29,7 +30,7 @@ namespace Projeto_Cassino
 
                 if (tipo == 1)
                 {
-                    if (pessoa.saldo >= 5)
+                    if (pessoa.Saldo >= 5)
                     {
                         Raspadinha5();
                     }
@@ -42,7 +43,7 @@ namespace Projeto_Cassino
                 }
                 else if (tipo == 2)
                 {
-                    if (pessoa.saldo >= 10)
+                    if (pessoa.Saldo >= 10)
                     {
                         Raspadinha10();
                     }
@@ -92,8 +93,8 @@ namespace Projeto_Cassino
                 else
                 {
                     Console.Clear();
-                    pessoa.saldo -= custo;
-                    Console.WriteLine($"Saldo atual: R$ {pessoa.saldo}");
+                    pessoa.Saldo -= custo;
+                    Console.WriteLine($"Saldo atual R$ {pessoa.Saldo}");
                     Console.WriteLine("Número principal: " + numeroPrincipal);
                     Console.WriteLine("Aguarde o resultado...");
 
@@ -109,13 +110,16 @@ namespace Projeto_Cassino
                     if (premioTotal > 0)
                     {
                         Console.WriteLine($"Parabéns você ganhou {premioTotal}!!!");
-                        pessoa.saldo += premioTotal;
-                        Console.WriteLine($"Saldo atual: {pessoa.saldo} ");
+                        pessoa.Saldo += premioTotal;
+                        Console.WriteLine($"Saldo atual R$ {pessoa.Saldo}");
+                        Console.WriteLine("Pressione ENTER para retornar");
                         Console.ReadKey();
                     }
                     else
                     {
                         Console.WriteLine("Que pena, não foi dessa vez, jogue novamente!");
+                        Console.WriteLine($"Saldo atual R$ {pessoa.Saldo}");
+                        Console.WriteLine("Pressione ENTER para retornar");
                         Console.ReadKey();
                     }
                 }
@@ -139,7 +143,7 @@ namespace Projeto_Cassino
             while (numeroPrincipal < 1 || numeroPrincipal > 10)
             {
                 Console.Clear();
-                pessoa.saldo -= custo;
+                pessoa.Saldo -= custo;
                 Console.WriteLine("Digite o número principal (Mínimo:1 | Máximo: 10):");
                 numeroPrincipal = int.Parse(Console.ReadLine());
                 if (numeroPrincipal < 1 || numeroPrincipal > 10)
@@ -165,21 +169,25 @@ namespace Projeto_Cassino
                     {
                         Console.WriteLine("Parabéns o seu número apareceu 3 Vezes");
                         Console.WriteLine($"Prêmio total: R$ {premioTotal}");
-                        pessoa.saldo += premioTotal;
-                        Console.WriteLine($"Saldo: R${pessoa.saldo}");
+                        pessoa.Saldo += premioTotal;
+                        Console.WriteLine($"Saldo atual R$ {pessoa.Saldo}");
+                        Console.WriteLine("Pressione ENTER para retornar");
                         Console.ReadKey();
                     }
                     else if (contador == 5)
                     {
                         Console.WriteLine("Parabéns o seu número apareceu 5 Vezes");
                         Console.WriteLine($"Prêmio total: R$ {premioTotal * 2}");
-                        pessoa.saldo += premioTotal*2;
-                        Console.WriteLine($"Saldo: R${pessoa.saldo}");
+                        pessoa.Saldo += premioTotal*2;
+                        Console.WriteLine($"Saldo atual R$ {pessoa.Saldo}");
+                        Console.WriteLine("Pressione ENTER para retornar");
                         Console.ReadKey();
                     }
                     else
                     {
                         Console.WriteLine("Que pena, não foi dessa vez, jogue novamente!");
+                        Console.WriteLine($"Saldo atual R$ {pessoa.Saldo}");
+                        Console.WriteLine("Pressione ENTER para retornar");
                         Console.ReadKey();
                     }
                 }
